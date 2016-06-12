@@ -1,0 +1,7 @@
+requests
+redis
+bs4
+flask_wtf
+wtforms
+flask
+feedgen

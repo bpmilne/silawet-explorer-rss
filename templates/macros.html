@@ -1,0 +1,11 @@
+{% macro has_error(field) %}
+{% if field.errors %}has-error{% endif %}
+{% endmacro %}
+
+{% macro errors(field) %}
+{% if field.errors %}
+  {% for error in field.errors %}
+    <label class="control-label">{{ error }}</label>
+  {% endfor %}
+{% endif %}
+{% endmacro %}

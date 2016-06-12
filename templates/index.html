@@ -1,0 +1,46 @@
+{% from 'macros.html' import has_error, errors %}
+
+<html>
+  <head>
+    <title>Silawet RSS</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <style type="text/css">
+     .url {
+       display: block;
+       word-wrap: break-word;
+       margin: 20px 0;
+     }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Silawet RSS Feeds</h1>
+      <form method="post" action="{{ url_for('index') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+          <div class="form-group {{ has_error(form.url) }}">
+            {{ errors(form.url) }}
+            {{ form.url(class_="form-control", placeholder="http://explorer.silawet.com/author/LS0tLS1CRUd...") }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg">Create RSS Feed</button>
+        </div>
+      </form>
+
+      {% for author in authors %}
+      <div class="urls">
+        <div class="url">
+          {{ author }}
+          <div>
+            <a href="{{ url_for('feed', author=author) }}" class="btn btn-primary">Go to RSS Feed</a>
+            <a href="http://explorer.silawet.com/author/{{ author }}" class="btn btn-default">View on Silawet Explorer</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
